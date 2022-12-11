@@ -12,15 +12,6 @@ import lombok.ToString;
 public class AppConfig {
 
     @Builder.Default
-    private BigDecimal lotStepSize = new BigDecimal("1");
-
-    @Builder.Default
-    private BigDecimal tradingAmountFactor = new BigDecimal("0.995");
-
-    @Builder.Default
-    private BigDecimal tickSize = new BigDecimal("0.0001");
-
-    @Builder.Default
     private String baseAsset = "XLM";
 
     @Builder.Default
@@ -28,6 +19,15 @@ public class AppConfig {
 
     @Builder.Default
     private String destAsset = "USDT";
+
+    @Builder.Default
+    private BigDecimal lotStepSize = new BigDecimal("1");
+
+    @Builder.Default
+    private BigDecimal tradingAmountFactor = new BigDecimal("0.995");
+
+    @Builder.Default
+    private BigDecimal tickSize = new BigDecimal("0.0001");
 
     @Builder.Default
     private String withdrawAdress = "binance-xlm";
