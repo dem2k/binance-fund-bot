@@ -8,7 +8,7 @@ if not exist %~dp0config\properties.bat (
 call %~dp0config\properties.bat
 set classpath=%~dp0config;%~dp0target\classes
 for %%i in ("%~dp0target\dependency\*.jar") do call :addcp %%i
-java foobar.AppMain %*
+java dem2k.AppMain %*
 goto ende
 :addcp
 set classpath=%1;%classpath%
