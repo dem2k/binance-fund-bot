@@ -46,13 +46,15 @@ public class AppMain {
                 .withdrawAdress(app.withdrawAdress)
                 .build();
 
+        System.out.println(config);
+
         AppUtils utils = new AppUtils(config);
         BuyerExchange buyerExchange =
-//                realKrakenBot(config, utils);
-                MockMocker.krakenBot(config, utils);
+               realKrakenBot(config, utils);
+                // MockMocker.krakenBot(config, utils);
         SellerExchange sellerExchange =
-//                realBinanceBot(config, utils);
-                MockMocker.binanceBot(config, utils);
+               realBinanceBot(config, utils);
+                // MockMocker.binanceBot(config, utils);
         Strategy strategy = new StrategyMarket(buyerExchange, sellerExchange, config, utils);
         AppController controller = new AppController(strategy);
         controller.start();
