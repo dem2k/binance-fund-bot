@@ -11,8 +11,10 @@ import com.binance.api.client.domain.TimeInForce;
 import com.binance.api.client.domain.account.NewOrderResponse;
 import com.binance.api.client.domain.market.OrderBook;
 import com.binance.api.client.domain.market.OrderBookEntry;
+import lombok.extern.slf4j.Slf4j;
 import picocli.CommandLine;
 
+@Slf4j
 public class ConvertAllBusdToUsdtByLimitOrder {
 
     @CommandLine.Option(names = "-bek", description = "Buyer Exchange API Key", required = true)
@@ -32,7 +34,7 @@ public class ConvertAllBusdToUsdtByLimitOrder {
 
     public static void main(String[] args) throws Exception {
 
-        ConvertAllBusdToUsdtByLimitOrder app = 
+        ConvertAllBusdToUsdtByLimitOrder app =
                 CommandLine.populateCommand(new ConvertAllBusdToUsdtByLimitOrder(), args);
 
         if (usageHelpRequested) {
@@ -47,6 +49,13 @@ public class ConvertAllBusdToUsdtByLimitOrder {
                 .sellerExchangeSecret(app.sellerExchangeSecret)
                 .build();
 
+        app.process(config);
+
+        Thread.sleep(10_000);
+        System.exit(0);
+    }
+
+    public void process(AppConfig config) {
         BinanceApiRestClient binance = BinanceApiClientFactory.newInstance(
                 config.sellerExchangeApiKey(), config.sellerExchangeSecret()).newRestClient();
 
@@ -57,16 +66,13 @@ public class ConvertAllBusdToUsdtByLimitOrder {
         OrderBookEntry bid = book.getBids().get(0);
         BigDecimal price = new BigDecimal(bid.getPrice()).max(new BigDecimal("1.0000"));
 
-        System.out.printf("Placing LIMIT %s x %s // %s %n",
+        log.info("Placing LIMIT {} x {} // {} \n",
                 busd, price.toPlainString(), bid);
         System.console().readLine("Press ENTER to continue...");
-        
+
         NewOrderResponse response = binance.newOrder(limitSell(
                 "BUSDUSDT", TimeInForce.GTC, busd, price.toPlainString()));
-        System.out.println(response);
-
-        Thread.sleep(10_000);
-        System.exit(0);
-
+        log.info("{}", response);
     }
+
 }
