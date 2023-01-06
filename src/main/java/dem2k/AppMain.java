@@ -46,8 +46,6 @@ public class AppMain {
                 .withdrawAdress(app.withdrawAdress)
                 .build();
 
-        System.out.println(config);
-
         AppUtils utils = new AppUtils(config);
         BuyerExchange buyerExchange =
                realKrakenBot(config, utils);

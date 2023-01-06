@@ -33,7 +33,7 @@ public class AppConfig {
     private String withdrawAdress = "binance-xlm";
     
     @Builder.Default
-    private long sleepTime = 2500;
+    private long sleepTime = 1500;
 
     private String buyerExchangeApiKey;
     private String buyerExchangeSecret;
