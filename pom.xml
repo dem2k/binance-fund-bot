@@ -65,7 +65,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>3.11.0</version>
                 <configuration>
                     <release>17</release>
                 </configuration>
@@ -78,15 +78,6 @@
                     <excludeArtifactIds>junit,lombok,hamcrest-core</excludeArtifactIds>
                 </configuration>
             </plugin>
-            <!--
-              <plugin><groupId>org.codehaus.mojo</groupId><artifactId>findbugs-maven-plugin</artifactId><version>${findbugs.version}</version></plugin>
-            -->
-            <!-- for jetty-run add to your pom.xml under /project/build/plugins/ (http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html)
-              <plugin><groupId>org.eclipse.jetty</groupId><artifactId>jetty-maven-plugin</artifactId><configuration><webApp><contextPath>/xtest</contextPath></webApp></configuration></plugin>
-            -->
         </plugins>
     </build>
-    <!--
-      <reporting><plugins><plugin><groupId>org.codehaus.mojo</groupId><artifactId>findbugs-maven-plugin</artifactId><version>${findbugs.version}</version></plugin></plugins></reporting>
-    -->
 </project>
