@@ -31,18 +31,13 @@ public class AppUtils {
     }
 
     public BigDecimal truncateLotSize(BigDecimal amount) {
-        switch (config.lotStepSize().toString()) {
-            case "1":
-                return amount.setScale(0, RoundingMode.DOWN);
-            case "0.1":
-                return amount.setScale(1, RoundingMode.DOWN);
-            case "0.01":
-                return amount.setScale(2, RoundingMode.DOWN);
-            case "0.001":
-                return amount.setScale(3, RoundingMode.DOWN);
-            default:
-                throw new RuntimeException("LOT_SIZE_NOT_IMPLEMENTED");
-        }
+        return switch (config.lotStepSize().toString()) {
+            case "1" -> amount.setScale(0, RoundingMode.DOWN);
+            case "0.1" -> amount.setScale(1, RoundingMode.DOWN);
+            case "0.01" -> amount.setScale(2, RoundingMode.DOWN);
+            case "0.001" -> amount.setScale(3, RoundingMode.DOWN);
+            default -> throw new RuntimeException("LOT_SIZE_NOT_IMPLEMENTED");
+        };
     }
 
 }
