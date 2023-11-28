@@ -18,15 +18,19 @@ public class AppMain {
 
     @CommandLine.Option(names = "-ses", description = "Seller Exchange Secret", required = true)
     private String sellerExchangeSecret;
+    
+    @CommandLine.Option(names = "-bas",description = "Base Asset. Default: XLM")
+    private String baseAsset ="XLM";
 
     @CommandLine.Option(names = "-dst", description = "Destination Asset. Default: USDT")
     private String destAsset = "USDT";
-    
+
     @CommandLine.Option(names = "-wa", description = "Withdrawal Adress Name. Default: binance-xlm")
     private String withdrawAdress = "binance-xlm";
 
     @CommandLine.Option(names = {"-?", "-h"}, description = "Display this Help Message", usageHelp = true)
     private static boolean usageHelpRequested = false;
+    
 
     public static void main(String[] args) throws Exception {
 
@@ -42,6 +46,7 @@ public class AppMain {
                 .buyerExchangeSecret(app.buyerExchangeSecret)
                 .sellerExchangeApiKey(app.sellerExchangeApiKey)
                 .sellerExchangeSecret(app.sellerExchangeSecret)
+                .baseAsset(app.baseAsset)
                 .destAsset(app.destAsset)
                 .withdrawAdress(app.withdrawAdress)
                 .build();
