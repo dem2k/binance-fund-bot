@@ -49,13 +49,21 @@ public class BuyerExchangeKraken implements BuyerExchange {
     @Override
     public BigDecimal bestAsk() throws KrakenApiException {
         OrderBookResult result = kraken.getOrderBook(config.buyTicker(), 1);
-        return result.getResult().get(config.ticketXZ()).asks.get(0).price;
+        return getOrderBook(result).asks.get(0).price;
     }
 
     @Override
     public BigDecimal bestBid() throws KrakenApiException {
         OrderBookResult result = kraken.getOrderBook(config.buyTicker(), 1);
-        return result.getResult().get(config.ticketXZ()).bids.get(0).price;
+        return getOrderBook(result).bids.get(0).price;
+    }
+
+    private OrderBookResult.OrderBook getOrderBook(OrderBookResult result) {
+        OrderBookResult.OrderBook orderBook = result.getResult().get(config.buyTicker());
+        if (orderBook == null) {
+            orderBook = result.getResult().get(config.ticketXZ());
+        }
+        return orderBook;
     }
 
     @Override
